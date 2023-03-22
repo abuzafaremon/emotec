@@ -1,6 +1,32 @@
-import { Link } from "react-router-dom";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import swal from "sweetalert";
+import auth from "../../firebase.init";
+import dummyUser from "../../assets/images/dummyUser.png";
 
 const Header = () => {
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      setUser(user);
+    }
+  });
+
+  const handleSignOut = () => {
+    signOut(auth)
+      .then(() => {
+        swal("Sign-out successful.", "", "success");
+        navigate("/login");
+      })
+      .catch((error) => {
+        swal("An Error Occurred.", `${error?.messages}`, "error");
+      })
+      .finally(() => {
+        setUser(null);
+      });
+  };
   return (
     <header className="navbar bg-base-100">
       <div className="navbar-start">
@@ -29,10 +55,10 @@ const Header = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="blogs">Blogs</Link>
+              <Link to="/blogs">Blogs</Link>
             </li>
             <li>
-              <Link to="about">About</Link>
+              <Link to="/about">About</Link>
             </li>
           </ul>
         </div>
@@ -89,33 +115,43 @@ const Header = () => {
             <span className="badge badge-xs badge-primary indicator-item"></span>
           </div>
         </button>
-        <Link to="/login" className="btn">
-          Login
-        </Link>
-        {/* <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div className="w-10 rounded-full">
-              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-            </div>
-          </label>
-          <ul
-            tabIndex={0}
-            className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-              <a className="justify-between">
-                Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
-            </li>
-          </ul>
-        </div> */}
+        {user ? (
+          <div className="dropdown dropdown-end">
+            <label
+              tabIndex={0}
+              className="btn btn-ghost btn-circle avatar online ring-2 ring-slate-700"
+            >
+              <div className="w-10 rounded-full">
+                {user?.photoURL ? (
+                  <img
+                    src={user?.photoURL}
+                    alt={user?.displayName?.split(" ")[0]}
+                  />
+                ) : (
+                  <img src={dummyUser} alt={user?.displayName?.split(" ")[0]} />
+                )}
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+            >
+              <li>
+                <Link to="" className="justify-between">
+                  Profile
+                  <span className="badge">New</span>
+                </Link>
+              </li>
+              <li>
+                <button onClick={handleSignOut}>Logout</button>
+              </li>
+            </ul>
+          </div>
+        ) : (
+          <Link to="/login" className="btn btn-ghost">
+            Login
+          </Link>
+        )}
       </div>
     </header>
   );
