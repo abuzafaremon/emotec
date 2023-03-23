@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header/Header";
+import AddPost from "./pages/AddPost/AddPost";
 import Login from "./pages/Authentication/Login/Login";
 import Register from "./pages/Authentication/Register/Register";
 import RequireAuth from "./pages/Authentication/RequireAuth/RequireAuth";
@@ -13,6 +14,14 @@ function App() {
     <div>
       <Header />
       <Routes>
+        <Route
+          path="/addPost"
+          element={
+            <RequireAuth>
+              <AddPost />
+            </RequireAuth>
+          }
+        />
         <Route
           path="/blogs"
           element={

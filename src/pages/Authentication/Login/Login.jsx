@@ -1,19 +1,25 @@
 import {
+  GoogleAuthProvider,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
+  signInWithPopup,
 } from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
+import Loading from "../../../components/Loading/Loading";
 import SmLoading from "../../../components/Loading/SmLoading";
 import auth from "../../../firebase.init";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
+  const [gLoading, setGLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [error, setError] = useState({});
+  const [gUser, setGUser] = useState(null);
+  const [gError, setGError] = useState({});
   const {
     register,
     formState: { errors },
@@ -39,6 +45,23 @@ const Login = () => {
         reset();
       });
   };
+
+  const provider = new GoogleAuthProvider();
+  const signInWithGoogle = async () => {
+    setGLoading(true);
+    await signInWithPopup(auth, provider)
+      .then((result) => {
+        setGUser(result.user);
+      })
+      .catch((error) => {
+        setGError(error);
+      });
+    setGLoading(false);
+  };
+
+  if (gLoading) {
+    return <Loading />;
+  }
 
   if (user) {
     navigate(from, { replace: true });
@@ -84,7 +107,7 @@ const Login = () => {
               {...register("email")}
               type="email"
               placeholder="Email"
-              autoComplete="onn"
+              autoComplete="on"
               disabled={loading}
               className="input input-bordered w-full max-w-xs"
             />
@@ -133,7 +156,11 @@ const Login = () => {
             </p>
           </div>
         </div>
-        <GoogleLogin />
+        <GoogleLogin
+          signInWithGoogle={signInWithGoogle}
+          gUser={gUser}
+          gError={gError}
+        />
       </form>
     </section>
   );

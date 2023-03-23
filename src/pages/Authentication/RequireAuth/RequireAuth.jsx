@@ -1,26 +1,29 @@
-import { onAuthStateChanged, sendEmailVerification } from "firebase/auth";
+import { sendEmailVerification } from "firebase/auth";
+import { useAuthState } from "react-firebase-hooks/auth";
 import React, { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import Loading from "../../../components/Loading/Loading";
 import auth from "../../../firebase.init";
-import { useAuthState } from "react-firebase-hooks/auth";
 
 const RequireAuth = ({ children }) => {
   // const [user, setUser] = useState(null);
-  // const [loading, setLoading] = useState(false);
+  // const [loading, setLoading] = useState(true);
+  const [sending, setSending] = useState(false);
+  const [user, loading] = useAuthState(auth);
   const location = useLocation();
 
-  const [user, loading] = useAuthState(auth);
-  // onAuthStateChanged(auth, (user) => {
+  // useLayoutEffect(() => {
   //   setLoading(true);
-  //   if (user) {
-  //     setUser(user);
-  //   }
-  //   setLoading(false);
-  // });
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       setUser(user);
+  //     }
+  //     setLoading(false);
+  //   });
+  // }, [auth]);
 
-  if (loading) {
+  if (loading || sending) {
     return <Loading />;
   }
 
@@ -28,14 +31,14 @@ const RequireAuth = ({ children }) => {
     return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
   }
   const handleEmailVerification = async () => {
-    // setLoading(true);
+    setSending(true);
     await sendEmailVerification();
     swal(
       "Your Verification Email Sent",
       "Check Your Email Inbox or Spam Folder",
       "success"
     );
-    // setLoading(false);
+    setSending(false);
   };
 
   if (!user?.emailVerified) {

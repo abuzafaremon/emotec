@@ -1,24 +1,26 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useState, useLayoutEffect } from "react";
+import { Link } from "react-router-dom";
 import swal from "sweetalert";
 import auth from "../../firebase.init";
 import dummyUser from "../../assets/images/dummyUser.png";
 
 const Header = () => {
   const [user, setUser] = useState(null);
-  const navigate = useNavigate();
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      setUser(user);
-    }
-  });
+
+  useLayoutEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+      }
+    });
+  }, [auth]);
 
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
         swal("Sign-out successful.", "", "success");
-        navigate("/login");
+        // navigate("/login");
       })
       .catch((error) => {
         swal("An Error Occurred.", `${error?.messages}`, "error");
@@ -58,7 +60,7 @@ const Header = () => {
               <Link to="/blogs">Blogs</Link>
             </li>
             <li>
-              <Link to="/about">About</Link>
+              <Link to="/addPost">Add Post</Link>
             </li>
           </ul>
         </div>
@@ -66,6 +68,7 @@ const Header = () => {
           Lets Make
         </Link>
       </div>
+
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
@@ -75,10 +78,11 @@ const Header = () => {
             <Link to="/blogs">Blogs</Link>
           </li>
           <li>
-            <Link to="/about">About</Link>
+            <Link to="/addPost">Add Post</Link>
           </li>
         </ul>
       </div>
+
       <div className="navbar-end">
         <button className="btn btn-ghost btn-circle">
           <svg
@@ -96,6 +100,7 @@ const Header = () => {
             />
           </svg>
         </button>
+
         <button className="btn btn-ghost btn-circle">
           <div className="indicator">
             <svg
@@ -115,6 +120,7 @@ const Header = () => {
             <span className="badge badge-xs badge-primary indicator-item"></span>
           </div>
         </button>
+
         {user ? (
           <div className="dropdown dropdown-end">
             <label
