@@ -56,17 +56,21 @@ const Register = () => {
         }).then((okk) => {
           if (okk) {
             sendEmailVerification(auth.currentUser).then(() => {
-              swal("Verification Email Sent!", {
-                icon: "success",
-              });
+              swal(
+                "Verification Email Sent!",
+                `Check Your inbox in ${data.email}`,
+                "success"
+              );
             });
           } else {
             swal("Verify First", "", "").then((okk) => {
               if (okk) {
                 sendEmailVerification(auth.currentUser).then(() => {
-                  swal("Verification Email Sent!", {
-                    icon: "success",
-                  });
+                  swal(
+                    "Verification Email Sent!",
+                    `Check Your inbox in ${data.email}`,
+                    "success"
+                  );
                 });
               } else {
                 signOut(auth)

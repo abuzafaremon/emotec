@@ -1,7 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
 import { Fragment } from "react";
 
-const PostMenu = ({ deletePost }) => {
+const PostMenu = ({ deletePost, openModal }) => {
   return (
     <div className="">
       <Menu as="div" className="relative inline-block text-left">
@@ -34,6 +34,7 @@ const PostMenu = ({ deletePost }) => {
             <Menu.Item>
               {({ active }) => (
                 <button
+                  onClick={openModal}
                   className={`${
                     active ? "bg-slate-700 text-white" : "text-gray-900"
                   } group flex w-full items-center rounded-md px-2 py-2 text-sm`}

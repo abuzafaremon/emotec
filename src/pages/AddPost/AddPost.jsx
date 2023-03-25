@@ -127,9 +127,6 @@ const AddPost = () => {
               Hey {user?.displayName}, write your post...
             </h2>
             <div className="form-control">
-              <label htmlFor="title" className="label">
-                <span className="label-text">Title:</span>
-              </label>
               <input
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
@@ -141,9 +138,6 @@ const AddPost = () => {
               />
             </div>
             <div className="form-control">
-              <label htmlFor="postText" className="label">
-                <span className="label-text">Post:</span>
-              </label>
               <textarea
                 onChange={(e) => setPostText(e.target.value)}
                 value={postText}

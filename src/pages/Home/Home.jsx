@@ -1,5 +1,13 @@
+import Hero from "./Hero/Hero";
+import LatestBlog from "./LatestBlog/LatestBlog";
+
 const Home = () => {
-  return <div>Home</div>;
+  return (
+    <div>
+      <Hero />
+      <LatestBlog />
+    </div>
+  );
 };
 
 export default Home;

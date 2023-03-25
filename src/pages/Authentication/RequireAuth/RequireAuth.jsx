@@ -1,27 +1,29 @@
-import { sendEmailVerification } from "firebase/auth";
-import { useAuthState } from "react-firebase-hooks/auth";
-import React, { useState } from "react";
+import { onAuthStateChanged, sendEmailVerification } from "firebase/auth";
+// import { useAuthState } from "react-firebase-hooks/auth";
+import React, { useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import swal from "sweetalert";
 import Loading from "../../../components/Loading/Loading";
 import auth from "../../../firebase.init";
 
 const RequireAuth = ({ children }) => {
-  // const [user, setUser] = useState(null);
-  // const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [sending, setSending] = useState(false);
-  const [user, loading] = useAuthState(auth);
+  // const [user, loading] = useAuthState(auth);
   const location = useLocation();
 
-  // useLayoutEffect(() => {
-  //   setLoading(true);
-  //   onAuthStateChanged(auth, (user) => {
-  //     if (user) {
-  //       setUser(user);
-  //     }
-  //     setLoading(false);
-  //   });
-  // }, [auth]);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        setLoading(false);
+      } else {
+        setUser(null);
+        setLoading(false);
+      }
+    });
+  }, []);
 
   if (loading || sending) {
     return <Loading />;
