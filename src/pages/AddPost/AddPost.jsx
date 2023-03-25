@@ -1,14 +1,9 @@
 import { onAuthStateChanged } from "firebase/auth";
-import {
-  addDoc,
-  collection,
-  doc,
-  serverTimestamp,
-  updateDoc,
-} from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useCallback, useMemo, useState, useLayoutEffect } from "react";
 import { useDropzone } from "react-dropzone";
+import { useNavigate } from "react-router-dom";
 import SmLoading from "../../components/Loading/SmLoading";
 import auth, { db, storage } from "../../firebase.init";
 
@@ -40,7 +35,6 @@ const acceptStyle = {
 const rejectStyle = {
   borderColor: "#ff1744",
 };
-
 const AddPost = () => {
   const [title, setTitle] = useState("");
   const [postText, setPostText] = useState("");
@@ -48,7 +42,7 @@ const AddPost = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   useLayoutEffect(
     () =>
@@ -58,9 +52,8 @@ const AddPost = () => {
         }
         setLoading(false);
       }),
-    [auth]
+    []
   );
-
   const onDrop = useCallback((acceptedFiles) => {
     setUploadedFile(acceptedFiles[0]);
   }, []);
@@ -91,13 +84,10 @@ const AddPost = () => {
           email: user?.email,
           photoURL: user?.photoURL,
         },
-        time: serverTimestamp(),
+        time: Date.now(),
       });
       if (uploadedFile) {
-        const imageRef = ref(
-          storage,
-          `postsImages/${uploadedFile.name + docRef.id}`
-        );
+        const imageRef = ref(storage, `postsImages/${title + docRef.id}`);
         uploadBytes(imageRef, uploadedFile, "data_url").then(async () => {
           const downloadURL = await getDownloadURL(imageRef);
           await updateDoc(doc(db, "posts", docRef.id), {
@@ -105,14 +95,16 @@ const AddPost = () => {
           });
         });
       }
+      navigate("/blogs");
 
       setTitle("");
       setPostText("");
       setUploadedFile(null);
 
       setLoading(false);
-    } catch (e) {
-      setError(e);
+    } catch (err) {
+      console.log(err);
+      setError(err);
     }
   };
 

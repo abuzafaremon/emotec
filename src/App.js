@@ -25,9 +25,9 @@ function App() {
         <Route
           path="/blogs"
           element={
-            <RequireAuth>
-              <Blogs />
-            </RequireAuth>
+            // <RequireAuth>
+            <Blogs />
+            // </RequireAuth>
           }
         />
         <Route path="/login" element={<Login />} />

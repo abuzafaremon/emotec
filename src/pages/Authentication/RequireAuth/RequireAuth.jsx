@@ -32,7 +32,7 @@ const RequireAuth = ({ children }) => {
   }
   const handleEmailVerification = async () => {
     setSending(true);
-    await sendEmailVerification();
+    await sendEmailVerification(auth.currentUser);
     swal(
       "Your Verification Email Sent",
       "Check Your Email Inbox or Spam Folder",

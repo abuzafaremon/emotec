@@ -14,7 +14,7 @@ const usePosts = () => {
         querySnapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
-          time: doc.data().time?.toDate().getTime(),
+          time: doc.data().time,
         }))
       );
     });

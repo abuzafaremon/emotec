@@ -7,14 +7,13 @@ import dummyUser from "../../assets/images/dummyUser.png";
 
 const Header = () => {
   const [user, setUser] = useState(null);
-
   useLayoutEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(user);
       }
     });
-  }, [auth]);
+  }, []);
 
   const handleSignOut = () => {
     signOut(auth)
