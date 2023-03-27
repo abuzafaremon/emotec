@@ -108,6 +108,7 @@ const Login = () => {
               type="email"
               placeholder="Email"
               autoComplete="on"
+              required
               disabled={loading}
               className="input input-bordered w-full max-w-xs"
             />
@@ -122,6 +123,7 @@ const Login = () => {
               placeholder="Password"
               type="password"
               disabled={loading}
+              required
               className="input input-bordered w-full max-w-xs"
             />
             <button

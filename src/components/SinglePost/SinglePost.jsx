@@ -12,6 +12,7 @@ import { useState } from "react";
 const SinglePost = ({ post, setLoading }) => {
   const user = auth.currentUser;
   const { title, postImage, postText, author, time, id } = post;
+  const [isShowMore, setIsShowMore] = useState(false);
   const navigate = useNavigate();
 
   // Update post modal
@@ -52,6 +53,10 @@ const SinglePost = ({ post, setLoading }) => {
     setLoading(false);
   };
 
+  const seeMore = () => {
+    setIsShowMore(!isShowMore);
+  };
+
   return (
     <>
       <div className="card card-compact bg-base-100 shadow-xl">
@@ -71,7 +76,20 @@ const SinglePost = ({ post, setLoading }) => {
         </div>
         <div className="px-2 pb-2">
           <h2 className="card-title">{title}</h2>
-          <p>{postText.split(" ").slice(0, 10).join(" ")}</p>
+          <p>
+            <span className="mr-1">
+              {isShowMore
+                ? postText
+                : postText.split(" ").slice(0, 10).join(" ")}
+            </span>
+            <span>
+              {postText.split(" ").length > 10 && (
+                <button onClick={seeMore} className="btn-link link-neutral">
+                  {isShowMore ? "See Less" : "See More"}
+                </button>
+              )}
+            </span>
+          </p>
         </div>
         <figure className="overflow-hidden">
           <img
@@ -80,8 +98,8 @@ const SinglePost = ({ post, setLoading }) => {
             alt={postImage && "Post Image"}
           />
         </figure>
-        <div className="card-actions justify-between p-2">
-          <button className="btn w-1/4 btn-sm flex items-center gap-1">
+        <div className="card-actions flex-nowrap p-2">
+          <button className="btn flex-grow btn-sm flex items-center gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
@@ -107,7 +125,7 @@ const SinglePost = ({ post, setLoading }) => {
             </svg>
             <span>Comment</span>
           </button>
-          <button className="btn w-1/4 btn-sm flex items-center gap-1">
+          <button className="btn flex-grow btn-sm flex items-center gap-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"

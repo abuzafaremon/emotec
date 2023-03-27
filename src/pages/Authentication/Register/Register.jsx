@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import auth from "../../../firebase.init";
+import auth, { db } from "../../../firebase.init";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Link } from "react-router-dom";
@@ -13,6 +13,7 @@ import {
 } from "firebase/auth";
 import swal from "sweetalert";
 import GoogleLogin from "../GoogleLogin/GoogleLogin";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 
 const schema = yup
   .object({
@@ -26,7 +27,7 @@ const schema = yup
     // .matches(
     //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/,
     //   "Must Contain One Uppercase, One Lowercase, One Number and One Special Case Character"
-    // ),
+    // )
   })
   .required();
 
@@ -90,7 +91,16 @@ const Register = () => {
     await updateProfile(auth.currentUser, {
       displayName: data.name,
     })
-      .then(() => {})
+      .then(async () => {
+        const userRef = await addDoc(collection(db, "users"), {
+          name: data.name,
+          email: data.email,
+          role: data.role,
+        });
+        await updateDoc(doc(db, "users", userRef.id), {
+          userId: auth.currentUser.uid,
+        });
+      })
       .catch((error) => {
         setUpdateError(error);
       })
@@ -150,6 +160,17 @@ const Register = () => {
             <p className="text-red-500 text-xs md:text-sm">
               {errors.password?.message}
             </p>
+          </div>
+          <div>
+            <select
+              {...register("role")}
+              defaultValue="User"
+              required
+              className="select select-bordered w-full max-w-xs"
+            >
+              <option value="User">Role - User</option>
+              <option value="Admin">Role - Admin</option>
+            </select>
           </div>
           <span className="text-sm">{errorElement}</span>
           <div>

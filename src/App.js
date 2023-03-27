@@ -9,12 +9,21 @@ import RequireAuth from "./pages/Authentication/RequireAuth/RequireAuth";
 import Blogs from "./pages/Blogs/Blogs";
 import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
+import Profile from "./pages/Profile/Profile";
 
 function App() {
   return (
     <div>
       <Header />
       <Routes>
+        <Route
+          path="/myProfile"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        />
         <Route
           path="/addPost"
           element={

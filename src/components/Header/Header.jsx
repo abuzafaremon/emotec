@@ -1,12 +1,13 @@
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useState, useLayoutEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import auth from "../../firebase.init";
 import dummyUser from "../../assets/images/dummyUser.png";
 
 const Header = () => {
   const [user, setUser] = useState(null);
+  const navigate = useNavigate();
   useLayoutEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -26,6 +27,7 @@ const Header = () => {
       })
       .finally(() => {
         setUser(null);
+        navigate("/addPost");
       });
   };
   return (
@@ -142,7 +144,7 @@ const Header = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link to="" className="justify-between">
+                <Link to="/myProfile" className="justify-between">
                   Profile
                   <span className="badge">New</span>
                 </Link>
