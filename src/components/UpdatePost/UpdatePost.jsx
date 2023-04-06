@@ -3,6 +3,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { Fragment, useState } from "react";
 import auth, { db } from "../../firebase.init";
 import SmLoading from "../Loading/SmLoading";
+import JoditEditor from "jodit-react";
 
 export default function UpdatePost({ isOpen, setIsOpen, closeModal, post }) {
   const user = auth.currentUser;
@@ -72,14 +73,10 @@ export default function UpdatePost({ isOpen, setIsOpen, closeModal, post }) {
                               />
                             </div>
                             <div className="form-control">
-                              <textarea
-                                onChange={(e) => setPostText(e.target.value)}
+                              <JoditEditor
                                 value={postText}
-                                type="text"
-                                placeholder={`Update Your Post`}
-                                required
-                                className="textarea input-bordered resize-none"
-                              ></textarea>
+                                onChange={(content) => setPostText(content)}
+                              />
                             </div>
                             <div className="form-control">
                               {/* <span>{error?.messages}</span> */}

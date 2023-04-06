@@ -4,6 +4,7 @@ import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useCallback, useMemo, useState, useLayoutEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { useNavigate } from "react-router-dom";
+import Jodit from "../../components/JoditEditor/JoditEditor";
 import SmLoading from "../../components/Loading/SmLoading";
 import auth, { db, storage } from "../../firebase.init";
 
@@ -138,7 +139,7 @@ const AddPost = () => {
               />
             </div>
             <div className="form-control">
-              <textarea
+              {/* <textarea
                 onChange={(e) => setPostText(e.target.value)}
                 value={postText}
                 type="text"
@@ -146,7 +147,8 @@ const AddPost = () => {
                 placeholder={`Whats on your mind ${user?.displayName}`}
                 required
                 className="textarea input-bordered resize-none"
-              ></textarea>
+              ></textarea> */}
+              <Jodit setPostText={setPostText} />
             </div>
             <div>
               <label className="label items-start gap-1">

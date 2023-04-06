@@ -8,13 +8,13 @@ import swal from "sweetalert";
 import { useNavigate } from "react-router-dom";
 import UpdatePost from "../UpdatePost/UpdatePost";
 import { useState } from "react";
+import parse from "html-react-parser";
 
 const SinglePost = ({ post, setLoading }) => {
   const user = auth.currentUser;
   const { title, postImage, postText, author, time, id } = post;
   const [isShowMore, setIsShowMore] = useState(false);
   const navigate = useNavigate();
-
   // Update post modal
   let [isOpen, setIsOpen] = useState(false);
 
@@ -76,8 +76,8 @@ const SinglePost = ({ post, setLoading }) => {
         </div>
         <div className="px-2 pb-2">
           <h2 className="card-title">{title}</h2>
-          <p>
-            <span className="mr-1">
+          <div>
+            {/* <span className="mr-1">
               {isShowMore
                 ? postText
                 : postText.split(" ").slice(0, 10).join(" ")}
@@ -88,8 +88,14 @@ const SinglePost = ({ post, setLoading }) => {
                   {isShowMore ? "See Less" : "See More"}
                 </button>
               )}
+            </span> */}
+            {isShowMore && parse(postText)}
+            <span>
+              <button onClick={seeMore} className="btn-link link-neutral">
+                {isShowMore ? "See Less" : "Read More"}
+              </button>
             </span>
-          </p>
+          </div>
         </div>
         <figure className="overflow-hidden">
           <img
