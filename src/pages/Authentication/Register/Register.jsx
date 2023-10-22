@@ -27,7 +27,7 @@ const schema = yup
     // .matches(
     //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/,
     //   "Must Contain One Uppercase, One Lowercase, One Number and One Special Case Character"
-    // )
+    // ),
   })
   .required();
 
@@ -95,7 +95,7 @@ const Register = () => {
         const userRef = await addDoc(collection(db, "users"), {
           name: data.name,
           email: data.email,
-          role: data.role,
+          role: (data.role = "user"),
         });
         await updateDoc(doc(db, "users", userRef.id), {
           userId: auth.currentUser.uid,
@@ -160,17 +160,6 @@ const Register = () => {
             <p className="text-red-500 text-xs md:text-sm">
               {errors.password?.message}
             </p>
-          </div>
-          <div>
-            <select
-              {...register("role")}
-              defaultValue="User"
-              required
-              className="select select-bordered w-full max-w-xs"
-            >
-              <option value="User">Role - User</option>
-              <option value="Admin">Role - Admin</option>
-            </select>
           </div>
           <span className="text-sm">{errorElement}</span>
           <div>

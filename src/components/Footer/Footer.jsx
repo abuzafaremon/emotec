@@ -1,11 +1,11 @@
 const Footer = () => {
   return (
     <>
-      <footer className="footer p-10 bg-base-200 text-base-content">
+      <footer className="footer grid-cols-2 p-10 bg-base-200 text-base-content">
         <div>
           <span className="footer-title">Services</span>
           <a
-            href="https://blog-letsmake.web.app/addPost"
+            href="https://blog-letsmake.web.app/addProduct"
             target="_blank"
             rel="noreferrer"
             className="link link-hover"
@@ -13,7 +13,7 @@ const Footer = () => {
             Branding
           </a>
           <a
-            href="https://blog-letsmake.web.app/addPost"
+            href="https://blog-letsmake.web.app/addProduct"
             target="_blank"
             rel="noreferrer"
             className="link link-hover"
@@ -21,7 +21,7 @@ const Footer = () => {
             Design
           </a>
           <a
-            href="https://blog-letsmake.web.app/addPost"
+            href="https://blog-letsmake.web.app/addProduct"
             target="_blank"
             rel="noreferrer"
             className="link link-hover"
@@ -29,7 +29,7 @@ const Footer = () => {
             Marketing
           </a>
           <a
-            href="https://blog-letsmake.web.app/addPost"
+            href="https://blog-letsmake.web.app/addProduct"
             target="_blank"
             rel="noreferrer"
             className="link link-hover"
@@ -40,7 +40,7 @@ const Footer = () => {
         <div>
           <span className="footer-title">Company</span>
           <a
-            href="https://blog-letsmake.web.app/addPost"
+            href="https://blog-letsmake.web.app/addProduct"
             target="_blank"
             rel="noreferrer"
             className="link link-hover"
@@ -48,7 +48,7 @@ const Footer = () => {
             About us
           </a>
           <a
-            href="https://blog-letsmake.web.app/addPost"
+            href="https://blog-letsmake.web.app/addProduct"
             target="_blank"
             rel="noreferrer"
             className="link link-hover"
@@ -56,7 +56,7 @@ const Footer = () => {
             Contact
           </a>
           <a
-            href="https://blog-letsmake.web.app/addPost"
+            href="https://blog-letsmake.web.app/addProduct"
             target="_blank"
             rel="noreferrer"
             className="link link-hover"
@@ -64,7 +64,7 @@ const Footer = () => {
             Jobs
           </a>
           <a
-            href="https://blog-letsmake.web.app/addPost"
+            href="https://blog-letsmake.web.app/addProduct"
             target="_blank"
             rel="noreferrer"
             className="link link-hover"
@@ -75,7 +75,7 @@ const Footer = () => {
         <div>
           <span className="footer-title">Legal</span>
           <a
-            href="https://blog-letsmake.web.app/addPost"
+            href="https://blog-letsmake.web.app/addProduct"
             target="_blank"
             rel="noreferrer"
             className="link link-hover"
@@ -83,7 +83,7 @@ const Footer = () => {
             Terms of use
           </a>
           <a
-            href="https://blog-letsmake.web.app/addPost"
+            href="https://blog-letsmake.web.app/addProduct"
             target="_blank"
             rel="noreferrer"
             className="link link-hover"
@@ -91,7 +91,7 @@ const Footer = () => {
             Privacy policy
           </a>
           <a
-            href="https://blog-letsmake.web.app/addPost"
+            href="https://blog-letsmake.web.app/addProduct"
             target="_blank"
             rel="noreferrer"
             className="link link-hover"
@@ -118,7 +118,7 @@ const Footer = () => {
         <div className="md:place-self-center md:justify-self-end">
           <div className="grid grid-flow-col gap-4">
             <a
-              href="https://blog-letsmake.web.app/addPost"
+              href="https://blog-letsmake.web.app/addProduct"
               target="_blank"
               rel="noreferrer"
             >
@@ -133,7 +133,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="https://blog-letsmake.web.app/addPost"
+              href="https://blog-letsmake.web.app/addProduct"
               target="_blank"
               rel="noreferrer"
             >
@@ -148,7 +148,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="https://blog-letsmake.web.app/addPost"
+              href="https://blog-letsmake.web.app/addProduct"
               target="_blank"
               rel="noreferrer"
             >

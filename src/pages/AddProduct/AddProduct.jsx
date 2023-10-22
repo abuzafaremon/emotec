@@ -38,7 +38,10 @@ const rejectStyle = {
 };
 const AddPost = () => {
   const [title, setTitle] = useState("");
+  const [shortDes, setShortDes] = useState("");
   const [postText, setPostText] = useState("");
+  const [category, setCategory] = useState("");
+  const [price, setPrice] = useState(0);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -65,6 +68,7 @@ const AddPost = () => {
       accept: {
         "image/jpeg": [],
         "image/png": [],
+        "image/jpg": [],
       },
       maxFiles: 1,
     });
@@ -79,6 +83,9 @@ const AddPost = () => {
       const docRef = await addDoc(collection(db, "posts"), {
         title: title,
         postText: postText,
+        shortDes: shortDes,
+        price: price,
+        category: category,
         author: {
           id: user?.uid,
           name: user?.displayName,
@@ -86,6 +93,11 @@ const AddPost = () => {
           photoURL: user?.photoURL,
         },
         time: Date.now(),
+        like: {
+          value: 0,
+          likerEmail: [],
+        },
+        comments: [],
       });
       if (uploadedFile) {
         const imageRef = ref(storage, `postsImages/${title + docRef.id}`);
@@ -96,7 +108,7 @@ const AddPost = () => {
           });
         });
       }
-      navigate("/blogs");
+      navigate("/products");
 
       setTitle("");
       setPostText("");
@@ -139,15 +151,37 @@ const AddPost = () => {
               />
             </div>
             <div className="form-control">
-              {/* <textarea
-                onChange={(e) => setPostText(e.target.value)}
-                value={postText}
-                type="text"
-                id="postText"
-                placeholder={`Whats on your mind ${user?.displayName}`}
+              <input
+                onChange={(e) => setPrice(e.target.value)}
+                value={price}
+                type="number"
+                id="price"
+                placeholder="Price..."
                 required
-                className="textarea input-bordered resize-none"
-              ></textarea> */}
+                className="input input-bordered"
+              />
+            </div>
+            <div className="form-control">
+              <input
+                onChange={(e) => setCategory(e.target.value)}
+                value={category}
+                type="text"
+                id="category"
+                placeholder="Category..."
+                required
+                className="input input-bordered"
+              />
+            </div>
+            <textarea
+              onChange={(e) => setShortDes(e.target.value)}
+              value={shortDes}
+              type="text"
+              id="shortDes"
+              placeholder="Short Description"
+              required
+              className="textarea input-bordered resize-none"
+            ></textarea>
+            <div>
               <Jodit setPostText={setPostText} />
             </div>
             <div>
