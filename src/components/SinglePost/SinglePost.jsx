@@ -5,13 +5,14 @@ import auth, { db, storage } from "../../firebase.init";
 import { deleteObject, ref } from "firebase/storage";
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import swal from "sweetalert";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import UpdatePost from "../UpdatePost/UpdatePost";
 import { useState } from "react";
 
 const SinglePost = ({ post, setLoading }) => {
   const user = auth.currentUser;
-  const { title, postImage, shortDes, author, time, id, price, like } = post;
+  const { title, postImage, intro, warranty, author, time, id, price, like } =
+    post;
   // const [liked, setLiked] = useState(false);
   const [isShowMore, setIsShowMore] = useState(false);
   const navigate = useNavigate();
@@ -52,6 +53,10 @@ const SinglePost = ({ post, setLoading }) => {
 
   const seeMore = () => {
     setIsShowMore(!isShowMore);
+  };
+  const handleOrder = (id) => {
+    // console.log(id);
+    navigate(`/products/order/${id}`);
   };
 
   const giveLike = async () => {
@@ -107,10 +112,11 @@ const SinglePost = ({ post, setLoading }) => {
         <div className="px-2 pb-2">
           <h2 className="card-title">{title}</h2>
           <div>
-            {isShowMore && shortDes}
+            {isShowMore && intro}
             <span>
-              <button onClick={seeMore} className="btn-link link-neutral">
-                {isShowMore ? "See Less" : "More"}
+              <p className="font-semibold text-sm">{warranty}</p>
+              <button onClick={seeMore} className="btn-link link-neutral block">
+                {isShowMore ? "See Less" : "Intro"}
               </button>
             </span>
           </div>
@@ -140,13 +146,12 @@ const SinglePost = ({ post, setLoading }) => {
             <span>Price-</span>
             <span className="text-xl font-semibold ">{price}/-</span>
           </button>
-          <Link
-            to="/ordernow"
-            state={{ post: post }}
+          <button
+            onClick={() => handleOrder(id)}
             className={`btn btn-outline flex-grow btn-sm flex items-center gap-1`}
           >
-            <span>Full Details</span>
-          </Link>
+            <span>Details</span>
+          </button>
         </div>
       </div>
       <UpdatePost

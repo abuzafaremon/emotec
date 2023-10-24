@@ -10,7 +10,7 @@ const GoogleLogin = ({ signInWithGoogle, gUser, gError }) => {
     if (gUser) {
       navigate(from, { replace: true });
     }
-  }, []);
+  }, [gUser, navigate, from]);
 
   let errorElement;
   if (gError) {

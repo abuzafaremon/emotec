@@ -12,7 +12,6 @@ import {
   updateProfile,
 } from "firebase/auth";
 import swal from "sweetalert";
-import GoogleLogin from "../GoogleLogin/GoogleLogin";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 
 const schema = yup
@@ -182,7 +181,6 @@ const Register = () => {
             </p>
           </div>
         </div>
-        <GoogleLogin />
       </form>
     </section>
   );

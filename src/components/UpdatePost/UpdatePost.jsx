@@ -9,6 +9,8 @@ export default function UpdatePost({ isOpen, setIsOpen, closeModal, post }) {
   const [title, setTitle] = useState(post.title);
   const [postText, setPostText] = useState(post.postText);
   const [price, setPrice] = useState(post.price);
+  const [warranty, setWarranty] = useState(post.warranty);
+  const [category, setCategory] = useState(post.category);
   const [loading, setLoading] = useState(false);
   const updatePost = async () => {
     setLoading(true);
@@ -19,6 +21,9 @@ export default function UpdatePost({ isOpen, setIsOpen, closeModal, post }) {
       title,
       postText,
       price,
+      warranty,
+      category,
+      time: Date.now(),
     });
 
     setLoading(false);
@@ -78,6 +83,26 @@ export default function UpdatePost({ isOpen, setIsOpen, closeModal, post }) {
                               value={price}
                               type="number"
                               placeholder="Update Price..."
+                              required
+                              className="input input-bordered"
+                            />
+                          </div>
+                          <div className="form-control">
+                            <input
+                              onChange={(e) => setCategory(e.target.value)}
+                              value={category}
+                              type="text"
+                              placeholder="Update Category..."
+                              required
+                              className="input input-bordered"
+                            />
+                          </div>
+                          <div className="form-control">
+                            <input
+                              onChange={(e) => setWarranty(e.target.value)}
+                              value={warranty}
+                              type="text"
+                              placeholder="Update Warranty..."
                               required
                               className="input input-bordered"
                             />

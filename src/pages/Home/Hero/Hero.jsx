@@ -8,9 +8,27 @@ const Hero = () => {
           <h1 className="mb-3 text-4xl sm:text-6xl font-bold">Hello there</h1>
           <h3 className="mb-3 text-xl font-bold">Welcome to One Click</h3>
           <p className="mb-5">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+            আমাদের ওয়েবসাইটে আপনাকে স্বাগতম। আমাদের কোন প্রোডাক্ট যদি আপনার
+            পছন্দ হয় এবং আপনি যদি অর্ডার করতে চান তাহলে আপনি আমাকে{" "}
+            <a
+              className="text-primary"
+              href="http://facebook.com/abuzafaremon"
+              target="_blank"
+              rel="noreferrer"
+            >
+              ফেসবুকে মেসেজ
+            </a>
+            <span> </span>
+            দিতে পারেন, হোয়াটসএপে মেসেজ দিতে পারেন। অথবা সরাসরি কল দিতে পারেন।
+            <span> </span>
+            <a
+              className="text-primary"
+              href="tel:+8801707894381"
+              target="_blank"
+              rel="noreferrer"
+            >
+              01707894381
+            </a>
           </p>
           <Link to="/products" className="btn">
             Get Started

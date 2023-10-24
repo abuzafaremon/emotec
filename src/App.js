@@ -11,6 +11,7 @@ import Home from "./pages/Home/Home";
 import NotFound from "./pages/NotFound/NotFound";
 import Profile from "./pages/Profile/Profile";
 import OrderNow from "./pages/OrderNow/OrderNow";
+import Smartwatch from "./pages/Smartwatch/Smartwatch";
 
 function App() {
   return (
@@ -33,15 +34,12 @@ function App() {
             </RequireAuth>
           }
         />
-        <Route
-          path="/products"
-          element={
-            // <RequireAuth>
-            <Products />
-            // </RequireAuth>
-          }
-        />
-        <Route path="/ordernow" element={<OrderNow />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/products/smartwatch" element={<Smartwatch />} />
+        <Route path="/products/earbuds" element={<Products />} />
+        <Route path="/products/neckband" element={<Products />} />
+        <Route path="/products/ups" element={<Products />} />
+        <Route path="/products/order/:productId" element={<OrderNow />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Home />} />

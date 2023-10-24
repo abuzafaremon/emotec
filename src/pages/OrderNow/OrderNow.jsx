@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import parse from "html-react-parser";
 import auth, { db } from "../../firebase.init";
 import { doc, updateDoc } from "firebase/firestore";
 import SmLoading from "../../components/Loading/SmLoading";
 import swal from "sweetalert";
+import usePosts from "../../hooks/usePosts";
 
 const OrderNow = () => {
   const user = auth.currentUser;
-  const location = useLocation();
-  const { post } = location.state;
+  const [posts] = usePosts();
+  const { productId } = useParams();
+  const product = posts.find((p) => p.id === productId);
   const [name, setName] = useState(user ? user.displayName : "");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+
   const handleOrder = async (e) => {
     e.preventDefault();
     if (!user) {
@@ -21,15 +24,19 @@ const OrderNow = () => {
     }
     setLoading(true);
 
-    const postRef = doc(db, "posts", post.id);
+    const postRef = doc(db, "posts", product.id);
     // Update the post
     await updateDoc(postRef, {
-      comments: [
-        ...post.comments,
-        { name: name, phone: phone, product: post.title, price: post.price },
+      orders: [
+        ...product.orders,
+        {
+          name: name,
+          phone: phone,
+          product: product.title,
+          price: product.price,
+        },
       ],
     });
-
     setLoading(false);
     setPhone("");
     swal("Your Order is Placed", "", "success");
@@ -37,13 +44,17 @@ const OrderNow = () => {
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content items-start flex-col lg:flex-row-reverse">
-        <img
-          className="max-w-sm rounded-lg shadow-2xl"
-          src={post?.postImage}
-          alt=""
-        />
         <div>
-          <h1 className="text-xl md:text-3xl font-bold">{post?.title}</h1>
+          <img
+            className="max-w-sm rounded-lg shadow-2xl"
+            src={product?.postImage}
+            alt=""
+          />
+          <p>{product?.title}</p>
+          <p className="font-semibold">{product?.warranty}</p>
+        </div>
+        <div>
+          <h1 className="text-xl md:text-3xl font-bold">{product?.title}</h1>
           <p className="py-5">
             অর্ডার করতে চাইলে আপনি আমাকে ফেসবুকে মেসেজ দিতে পারেন, অথবা
             হোয়াটসএপে মেসেজ দিতে পারেন। অথবা সরাসরি কল দিতে পারেন।
@@ -76,7 +87,9 @@ const OrderNow = () => {
             Call Me
           </a>
           <div className="py-5">
-            <h2 className="text-lg font-semibold">Order Form</h2>
+            <h2 className="font-semibold">
+              অথবা, আপনার তথ্য দিন আমরা আপনার সাথে যোগাযোগ করবো।
+            </h2>
             <form>
               <div className="form-control mb-1">
                 <input
@@ -84,7 +97,7 @@ const OrderNow = () => {
                   value={name}
                   type="text"
                   id="name"
-                  placeholder="Your Name..."
+                  placeholder="আপনার নাম..."
                   required
                   className="input input-bordered"
                 />
@@ -93,19 +106,21 @@ const OrderNow = () => {
                 <input
                   onChange={(e) => setPhone(e.target.value)}
                   value={phone}
+                  minLength={11}
+                  maxLength={11}
                   type="text"
                   id="phone"
-                  placeholder="Your Phone Number..."
+                  placeholder="আপনার মোবাইল নাম্বার..."
                   required
                   className="input input-bordered"
                 />
               </div>
               <button onClick={handleOrder} className="btn btn-primary btn-sm">
-                {loading ? <SmLoading /> : "Order"}
+                {loading ? <SmLoading /> : "জমা দিন"}
               </button>
             </form>
           </div>
-          <div className="p-5">{parse(post?.postText)}</div>
+          <div className="p-5">{product && parse(product?.postText)}</div>
         </div>
       </div>
     </div>

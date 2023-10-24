@@ -38,9 +38,10 @@ const rejectStyle = {
 };
 const AddPost = () => {
   const [title, setTitle] = useState("");
-  const [shortDes, setShortDes] = useState("");
+  const [intro, setIntro] = useState("");
   const [postText, setPostText] = useState("");
   const [category, setCategory] = useState("");
+  const [warranty, setWarranty] = useState("");
   const [price, setPrice] = useState(0);
   const [uploadedFile, setUploadedFile] = useState(null);
   const [error, setError] = useState(null);
@@ -83,9 +84,10 @@ const AddPost = () => {
       const docRef = await addDoc(collection(db, "posts"), {
         title: title,
         postText: postText,
-        shortDes: shortDes,
+        intro: intro,
         price: price,
         category: category,
+        warranty: warranty,
         author: {
           id: user?.uid,
           name: user?.displayName,
@@ -95,9 +97,10 @@ const AddPost = () => {
         time: Date.now(),
         like: {
           value: 0,
+          likerName: [],
           likerEmail: [],
         },
-        comments: [],
+        orders: [],
       });
       if (uploadedFile) {
         const imageRef = ref(storage, `postsImages/${title + docRef.id}`);
@@ -173,14 +176,25 @@ const AddPost = () => {
               />
             </div>
             <textarea
-              onChange={(e) => setShortDes(e.target.value)}
-              value={shortDes}
+              onChange={(e) => setIntro(e.target.value)}
+              value={intro}
               type="text"
-              id="shortDes"
+              id="intro"
               placeholder="Short Description"
               required
               className="textarea input-bordered resize-none"
             ></textarea>
+            <div className="form-control">
+              <input
+                onChange={(e) => setWarranty(e.target.value)}
+                value={warranty}
+                type="text"
+                id="warranty"
+                placeholder="Warranty..."
+                required
+                className="input input-bordered"
+              />
+            </div>
             <div>
               <Jodit setPostText={setPostText} />
             </div>
