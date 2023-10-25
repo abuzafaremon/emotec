@@ -67,6 +67,7 @@ const SinglePost = ({ post, setLoading }) => {
         await updateDoc(postRef, {
           like: {
             value: like.value + 1,
+            likerName: [...like.likerName, String(user?.displayName)],
             likerEmail: [...like.likerEmail, String(user?.email)],
           },
         });
@@ -78,7 +79,7 @@ const SinglePost = ({ post, setLoading }) => {
 
   return (
     <>
-      <div className="card card-compact bg-base-100 shadow-xl">
+      <div className="card card-compact bg-base-100 shadow-xl p-2">
         <div className="flex items-center gap-2 p-2">
           <div className="w-8 h-8 rounded-full overflow-hidden ring-1 ring-offset-white ring-offset-2">
             <a
@@ -130,6 +131,10 @@ const SinglePost = ({ post, setLoading }) => {
             />
           </figure>
         )}
+        <div className="px-2">
+          {like?.likerName[like.likerName.length - 1]} and{" "}
+          {like?.likerName.length - 1} others Liked
+        </div>
         <div className="card-actions flex-nowrap p-2">
           <button
             onClick={giveLike}

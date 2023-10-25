@@ -55,15 +55,22 @@ const Header = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <Link to="/home">Home</Link>
-            </li>
-            {user && user?.email === "ek985307@gmail.com" && (
-              <li>
-                <Link to="/addProduct">Add Product</Link>
-              </li>
-            )}
-            <li>
               <Link to="/products">All Products</Link>
+            </li>
+            <li>
+              <Link to="/products/ups">Ups</Link>
+            </li>
+            <li>
+              <Link to="/products/smartwatch">Smartwatch</Link>
+            </li>
+            <li>
+              <Link to="/products/earbuds">Earbuds</Link>
+            </li>
+            <li>
+              <Link to="/products/neckband">Neckband</Link>
+            </li>
+            <li>
+              <Link to="/products/powerbank">Powerbank</Link>
             </li>
           </ul>
         </div>
@@ -75,16 +82,23 @@ const Header = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link to="/home">Home</Link>
-          </li>
-          <li>
             <Link to="/products">All Products</Link>
           </li>
-          {user && user?.email === "ek985307@gmail.com" && (
-            <li>
-              <Link to="/addProduct">Add Product</Link>
-            </li>
-          )}
+          <li>
+            <Link to="/products/ups">Ups</Link>
+          </li>
+          <li>
+            <Link to="/products/smartwatch">Smartwatch</Link>
+          </li>
+          <li>
+            <Link to="/products/earbuds">Earbuds</Link>
+          </li>
+          <li>
+            <Link to="/products/neckband">Neckband</Link>
+          </li>
+          <li>
+            <Link to="/products/powerbank">Powerbank</Link>
+          </li>
         </ul>
       </div>
 
@@ -167,6 +181,11 @@ const Header = () => {
                   <span className="badge">New</span>
                 </Link>
               </li>
+              {user && user?.email === "ek985307@gmail.com" && (
+                <li>
+                  <Link to="/addProduct">Add Product</Link>
+                </li>
+              )}
               <li>
                 <button onClick={handleSignOut}>Logout</button>
               </li>

@@ -12,6 +12,10 @@ import NotFound from "./pages/NotFound/NotFound";
 import Profile from "./pages/Profile/Profile";
 import OrderNow from "./pages/OrderNow/OrderNow";
 import Smartwatch from "./pages/Smartwatch/Smartwatch";
+import Earbuds from "./pages/Earbuds/Earbuds";
+import Neckband from "./pages/Neckband/Neckbands";
+import Ups from "./pages/Ups/Ups";
+import PowerBank from "./pages/PowerBank/PowerBank";
 
 function App() {
   return (
@@ -36,9 +40,10 @@ function App() {
         />
         <Route path="/products" element={<Products />} />
         <Route path="/products/smartwatch" element={<Smartwatch />} />
-        <Route path="/products/earbuds" element={<Products />} />
-        <Route path="/products/neckband" element={<Products />} />
-        <Route path="/products/ups" element={<Products />} />
+        <Route path="/products/earbuds" element={<Earbuds />} />
+        <Route path="/products/neckband" element={<Neckband />} />
+        <Route path="/products/ups" element={<Ups />} />
+        <Route path="/products/powerbank" element={<PowerBank />} />
         <Route path="/products/order/:productId" element={<OrderNow />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

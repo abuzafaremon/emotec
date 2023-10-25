@@ -13,7 +13,7 @@ const OrderNow = () => {
   const { productId } = useParams();
   const product = posts.find((p) => p.id === productId);
   const [name, setName] = useState(user ? user.displayName : "");
-  const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState("+8801");
   const [loading, setLoading] = useState(false);
 
   const handleOrder = async (e) => {
@@ -31,6 +31,7 @@ const OrderNow = () => {
         ...product.orders,
         {
           name: name,
+          email: user?.email,
           phone: phone,
           product: product.title,
           price: product.price,
@@ -44,9 +45,9 @@ const OrderNow = () => {
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content items-start flex-col lg:flex-row-reverse">
-        <div>
+        <div className="w-full">
           <img
-            className="max-w-sm rounded-lg shadow-2xl"
+            className="w-full max-w-sm lg:max-w-full rounded-lg shadow-lg"
             src={product?.postImage}
             alt=""
           />

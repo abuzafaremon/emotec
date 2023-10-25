@@ -12,10 +12,10 @@ const Products = () => {
   return (
     <>
       <div className="p-5 md:p-10">
-        <p className="text-3xl text-slate-700 font-bold text-center pb-5 uppercase">
+        <p className="text-3xl text-slate-700 font-bold text-center pb-5">
           All Products
         </p>
-        <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-5">
+        <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-5">
           {posts.length === 0 && <Loading />}
           {posts.map((post) => (
             <SinglePost post={post} key={post.id} setLoading={setLoading} />

@@ -1,103 +1,50 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <>
       <footer className="footer grid-cols-2 p-10 bg-base-200 text-base-content border-t border-gray-300">
         <div>
           <span className="footer-title">Services</span>
-          <a
-            href="https://blog-letsmake.web.app/addProduct"
-            target="_blank"
-            rel="noreferrer"
-            className="link link-hover"
-          >
+          <Link to="/products" className="link link-hover">
             Branding
-          </a>
-          <a
-            href="https://blog-letsmake.web.app/addProduct"
-            target="_blank"
-            rel="noreferrer"
-            className="link link-hover"
-          >
+          </Link>
+          <Link to="/products" className="link link-hover">
             Design
-          </a>
-          <a
-            href="https://blog-letsmake.web.app/addProduct"
-            target="_blank"
-            rel="noreferrer"
-            className="link link-hover"
-          >
+          </Link>
+          <Link to="/products" className="link link-hover">
             Marketing
-          </a>
-          <a
-            href="https://blog-letsmake.web.app/addProduct"
-            target="_blank"
-            rel="noreferrer"
-            className="link link-hover"
-          >
+          </Link>
+          <Link to="/products" className="link link-hover">
             Advertisement
-          </a>
+          </Link>
         </div>
         <div>
           <span className="footer-title">Company</span>
-          <a
-            href="https://blog-letsmake.web.app/addProduct"
-            target="_blank"
-            rel="noreferrer"
-            className="link link-hover"
-          >
+          <Link to="/products" className="link link-hover">
             About us
-          </a>
-          <a
-            href="https://blog-letsmake.web.app/addProduct"
-            target="_blank"
-            rel="noreferrer"
-            className="link link-hover"
-          >
+          </Link>
+          <Link to="/products" className="link link-hover">
             Contact
-          </a>
-          <a
-            href="https://blog-letsmake.web.app/addProduct"
-            target="_blank"
-            rel="noreferrer"
-            className="link link-hover"
-          >
+          </Link>
+          <Link to="/products" className="link link-hover">
             Jobs
-          </a>
-          <a
-            href="https://blog-letsmake.web.app/addProduct"
-            target="_blank"
-            rel="noreferrer"
-            className="link link-hover"
-          >
+          </Link>
+          <Link to="/products" className="link link-hover">
             Press kit
-          </a>
+          </Link>
         </div>
         <div>
           <span className="footer-title">Legal</span>
-          <a
-            href="https://blog-letsmake.web.app/addProduct"
-            target="_blank"
-            rel="noreferrer"
-            className="link link-hover"
-          >
+          <Link to="/products" className="link link-hover">
             Terms of use
-          </a>
-          <a
-            href="https://blog-letsmake.web.app/addProduct"
-            target="_blank"
-            rel="noreferrer"
-            className="link link-hover"
-          >
+          </Link>
+          <Link to="/products" className="link link-hover">
             Privacy policy
-          </a>
-          <a
-            href="https://blog-letsmake.web.app/addProduct"
-            target="_blank"
-            rel="noreferrer"
-            className="link link-hover"
-          >
+          </Link>
+          <Link to="/products" className="link link-hover">
             Cookie policy
-          </a>
+          </Link>
         </div>
       </footer>
       <footer className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
@@ -118,7 +65,7 @@ const Footer = () => {
         <div className="md:place-self-center md:justify-self-end">
           <div className="grid grid-flow-col gap-4">
             <a
-              href="https://blog-letsmake.web.app/addProduct"
+              href="https://emotec-shop.web.app/products"
               target="_blank"
               rel="noreferrer"
             >
@@ -133,7 +80,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="https://blog-letsmake.web.app/addProduct"
+              href="https://www.youtube.com/channel/UCZrcUcBJ3uqPHPwVocv68Fw"
               target="_blank"
               rel="noreferrer"
             >
@@ -148,7 +95,7 @@ const Footer = () => {
               </svg>
             </a>
             <a
-              href="https://blog-letsmake.web.app/addProduct"
+              href="https://facebook.com/oneclick444"
               target="_blank"
               rel="noreferrer"
             >
